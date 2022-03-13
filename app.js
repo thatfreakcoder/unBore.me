@@ -15,13 +15,16 @@ async function getActivity() {
 function changeTheme() {
     darkTheme = !darkTheme;
     const root = document.querySelector(":root");
+    const icon = document.getElementById("icon");
     if (darkTheme) {
-        console.log(darkTheme);
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
         root.style.setProperty("--background-theme", "#040d19");
         root.style.setProperty("--background-theme-text", "#d2e3f7");
         root.style.setProperty("--background-theme-complementary", "#1C3144");
     } else {
-        console.log(darkTheme);
+        icon.classList.remove("fa-sun");
+        icon.classList.add("fa-moon");
         root.style.setProperty("--background-theme", "#f2f2f2");
         root.style.setProperty("--background-theme-text", "#060e24");
         root.style.setProperty("--background-theme-complementary", "#d9e0ed");
