@@ -4,13 +4,13 @@ const cacheName = 'unBore.me';
 self.addEventListener('install', e => {
     e.waitUntil(
         caches.open(cacheName).then(cache => {
-            // return cache.addAll([
-            //     './',
-            //     './index.html',
-            //     './manifest.json',
-            //     './app.js',
-            //     './style.css',
-            // ]);
+            return cache.addAll([
+                './',
+                './index.html',
+                './manifest.json',
+                './app.js',
+                './style.css',
+            ]);
             return null;
         })
     );
