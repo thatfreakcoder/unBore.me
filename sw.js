@@ -11,7 +11,23 @@ self.addEventListener('install', e => {
                 './app.js',
                 './style.css',
             ]);
-            return null;
+        })
+    );
+});
+
+self.addEventListener('activate', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.filter(function(cachedName) {
+                    // Return true if you want to remove this cache,
+                    // but remember that caches are shared across
+                    // the whole origin
+                    return true;
+                }).map(function(cachedName) {
+                    return caches.delete(cachedName);
+                })
+            );
         })
     );
 });
