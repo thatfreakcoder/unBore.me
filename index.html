@@ -5,16 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: var(--background-theme);
+        }
+        
+        .header {
+            min-width: 100vw;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: var(--background-theme-complementary);
+            color: var(--background-theme-text);
+        }
+        
+        .header p {
+            margin-block-start: 1rem!important;
+            margin-block-end: 1rem!important;
+            font-size: 30px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        
+         :root {
+            --background-theme: #040d19;
+            --background-theme-text: #d2e3f7;
+            --background-theme-complementary: #1C3144;
+            --shadow-color: #000;
+        }
+    </style>
+    <meta name="description" content="unBore your life, check out things to do when you're bored. Never let boredom come in your life again.">
+    <meta name="keywords" content="bore, bored, boring, fun, activity, feeling bored, what to do when bored, unbore, time pass, timepass, alone, exciting things to do">
+    <meta name="author" content="Yuvraj Dagur">
+    <meta name="theme-color" content="#040d19">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-title" content="unBore.me">
+    <meta name="application-name" content="unBore.me">
+    <meta name="msapplication-navbutton-color" content="#040d19">
+    <meta name="msapplication-TileColor" content="#040d19">
+    <meta name="msapplication-TileImage" content="./assets/icon-512x512.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#040d19">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="192x192" href="./assets/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="./assets/icon-256x256.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="./assets/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./assets/icon-512x512.png">
     <title>unBore.me | Relive the Unboring Life</title>
     <!-- add favicon -->
     <link rel="shortcut icon" href="./assets/icon-512x512.png" type="image/x-icon">
     <link rel="icon" href="./assets/icon-512x512.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://boredapi.com" crossorigin>
+    <link rel="preconnect" href="https://use.fontawesome.com" crossorigin>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" aria-disabled="true">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" aria-disabled="true">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="https://fonts.googleapis.com" as="font">
+    <link rel="preload" href="https://fonts.gstatic.com" crossorigin as="font">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#222831">
     <link rel='manifest' href='./manifest.json'>
@@ -40,7 +90,7 @@
 <body>
     <div class="header">
         <p class="header-brand">un<b>Bore</b>.me</p>
-        <button onClick="changeTheme()">
+        <button aria-label="theme-changer" onClick="changeTheme()">
             <i class="fas fa-moon" id="icon"></i>
         </button>
     </div>
@@ -49,10 +99,14 @@
         <div class="spinner-border text-primary" role="status" id="loader">
             <span class="sr-only">Loading...</span>
         </div>
-        <button class="btn-reload" type="button" onclick="getActivity()">Nah! Show me some more</button>
+        <!-- <button class="btn-reload" type="button" onclick="getActivity()">Nah! Show me some more</button> -->
+        <div class="w-75 d-flex flex-row justify-content-between">
+            <button aria-label="previous" class="btn-reload" type="button" id="prev" onclick="getNextActivity(-1)">Prev</button>
+            <button aria-label="next" class="btn-reload" type="button" id="next" onclick="getNextActivity(1)">Next</button>
+        </div>
     </div>
     <script src="./app.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
 </body>
 
 </html>
