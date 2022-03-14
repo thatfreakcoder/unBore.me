@@ -1,14 +1,46 @@
 const url = "https://www.boredapi.com/api/activity";
 var darkTheme = true;
+var activities = [];
+var currentActivity = 0;
 
 async function getActivity() {
-    fetch(url).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("main").innerText = data.activity;
-    }).catch(function(e) {});
+    let response = await fetch(url);
+    let activity = await response.json();
+    activities.push(activity);
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("main").innerText = activity.activity;
+    for (let i = 0; i < 4; i++) {
+        let response = await fetch(url);
+        let activity = await response.json();
+        activities.push(activity);
+    }
+    console.log(activities);
+    // await fetch(url).then(response => {
+    //     return response.json();
+    // }).then(data => {
+    // }).catch(e => {
+    //     document.getElementById("loader").style.display = "none";
+    //     document.getElementById("main").innerText = e;
+    // });
 };
+
+async function getNextActivity(i) {
+    if (currentActivity < activities.length) {
+        if (i === 1) {
+            currentActivity++;
+        } else {
+            if (currentActivity === 0) {
+                currentActivity = 0;
+            } else {
+                currentActivity--;
+            }
+        }
+    }
+    if (currentActivity === activities.length) {
+        await getActivity();
+    }
+    document.getElementById("main").innerText = activities[currentActivity].activity;
+}
 
 function changeTheme() {
     darkTheme = !darkTheme;
