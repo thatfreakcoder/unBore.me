@@ -1,11 +1,12 @@
 body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
     background-color: var(--background-theme);
 }
 
 @media screen and (max-width: 768px) {
-    #main {
+    .main {
         font-family: 'Josefin Sans', sans-serif;
         font-size: 44px;
         font-weight: 900;
@@ -14,7 +15,7 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-    #main {
+    .main {
         font-family: 'Josefin Sans', sans-serif;
         font-size: 94px;
         font-weight: 900;
@@ -41,7 +42,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh;
+    min-height: 90vh;
 }
 
 .header {
@@ -69,17 +70,21 @@ body {
 }
 
 .spinner-border {
-    width: 20rem;
-    height: 20rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 .text-primary {
     color: var(--background-theme-text)!important;
 }
 
+.swiper-slide:nth-child(n) {
+    background-color: var(--background-theme-complementary);
+}
+
 :root {
-    --background-theme: #040d19;
-    --background-theme-text: #d2e3f7;
-    --background-theme-complementary: #1C3144;
+    --background-theme: #041C32;
+    --background-theme-complementary: #04293A;
+    --background-theme-text: #ECB365;
     --shadow-color: #000;
 }
