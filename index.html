@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <style>
         body {
+            overflow-x: hidden;
+            overflow-y: hidden;
             margin: 0px;
             padding: 0px;
             background-color: var(--background-theme);
@@ -27,6 +29,21 @@
             font-size: 30px;
             font-weight: bold;
             margin-left: 20px;
+        }
+        
+        .swiper {
+            width: 80vw;
+            height: 70vh;
+        }
+        
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
         }
         
          :root {
@@ -55,7 +72,8 @@
     <link rel="apple-touch-icon" sizes="384x384" href="./assets/icon-384x384.png">
     <link rel="apple-touch-icon" sizes="512x512" href="./assets/icon-512x512.png">
     <title>unBore.me | Relive the Unboring Life</title>
-    <!-- add favicon -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" /> -->
     <link rel="shortcut icon" href="./assets/icon-512x512.png" type="image/x-icon">
     <link rel="icon" href="./assets/icon-512x512.png" type="image/x-icon">
     <link rel="preconnect" href="https://boredapi.com" crossorigin>
@@ -63,8 +81,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" aria-disabled="true">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" aria-disabled="true">
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="https://fonts.googleapis.com" as="font">
-    <link rel="preload" href="https://fonts.gstatic.com" crossorigin as="font">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#222831">
     <link rel='manifest' href='./manifest.json'>
@@ -91,22 +109,31 @@
     <div class="header">
         <p class="header-brand">un<b>Bore</b>.me</p>
         <button aria-label="theme-changer" onClick="changeTheme()">
-            <i class="fas fa-moon" id="icon"></i>
+            <i class="fas fa-random" id="icon"></i>
         </button>
     </div>
     <div class="activity-container text-center">
-        <p id="main"></p>
-        <div class="spinner-border text-primary" role="status" id="loader">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <!-- <button class="btn-reload" type="button" onclick="getActivity()">Nah! Show me some more</button> -->
-        <div class="w-75 d-flex flex-row justify-content-between">
-            <button aria-label="previous" class="btn-reload" type="button" id="prev" onclick="getNextActivity(-1)">Prev</button>
-            <button aria-label="next" class="btn-reload" type="button" id="next" onclick="getNextActivity(1)">Next</button>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="spinner-border text-primary" role="status" id="loader">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p id="slide-0" class="main"></p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./app.js" defer></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "cards",
+            grabCursor: true,
+            longSwipes: false
+        });
+    </script>
 </body>
 
 </html>
