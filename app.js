@@ -17,22 +17,13 @@ async function getNextActivities(start, end) {
         swiper.appendSlide(`<div class="swiper-slide"><p id="slide-${i}" class="main">${activity.activity}</p></div>`);
         activities.push(activity);
     }
-    swiper.appendSlide(`<div class="swiper-slide">
-    <button class="btn-reload" onclick="reload(${activities.length})">Gimme More!!</button>
-    <div class="spinner-border text-primary" role="status" id="loader-${activities.length}" style="display: none">
-        <span class="sr-only">Loading...</span>
-    </div>
-    </div>`);
-    console.log(activities);
 };
 
-async function reload(i) {
-    document.querySelector('.btn-reload').style.display = "none"
-    document.querySelector(`#loader-${i}`).style.display = "block";
-    await getNextActivities(i, i + 5);
-    swiper.slideNext();
-    swiper.removeSlide(i);
-}
+swiper.on('slideChange', () => {
+    if (swiper.activeIndex == activities.length - 2) {
+        getNextActivities(activities.length, activities.length + 5);
+    }
+})
 
 function changeTheme() {
     const root = document.querySelector(":root");
